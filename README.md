@@ -26,6 +26,9 @@ $ npm run dev
 # Generate untuk migrasi database
 $ php artisan migrate
 
+# membuat seeder untuk db
+$ php artisan db:seed
+
 # Generate untuk menjalankan aplikasi ke localhost (default: localhost::8000)
 $ php artisan serve
 
