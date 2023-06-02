@@ -6,29 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTransactionsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->string('invoice_number')->unique();
-            $table->decimal('total_amount', 8, 2);
+            $table->decimal('total', 8, 2);
             $table->timestamps();
+        });
+
+        Schema::create('item_transaction', function (Blueprint $table) {
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('transaction_id');
+            $table->integer('quantity')->default(1);
+
+            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('transaction_id')->references('id')->on('transactions');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
+        Schema::dropIfExists('item_transaction');
         Schema::dropIfExists('transactions');
     }
 }

@@ -4,26 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Transaction;
-use App\Models\User;
 
-class TransactionSeeder extends Seeder
+class TransactionsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $user = User::first();
+        Transaction::create([
+            'total' => 50000,
+        ]);
 
-        $transactions = [
-            ['invoice_number' => 'INV001', 'total_amount' => 25000, 'user_id' => $user->id],
-            ['invoice_number' => 'INV002', 'total_amount' => 12000, 'user_id' => $user->id],
-        ];
-
-        foreach ($transactions as $transaction) {
-            Transaction::create($transaction);
-        }
+        // Tambahkan transaksi lainnya di sini sesuai kebutuhan
     }
 }

@@ -8,32 +8,36 @@ use App\Models\Category;
 
 class ItemSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $makananCategory = Category::where('name', 'Makanan')->first();
-        $minumanCategory = Category::where('name', 'Minuman')->first();
+        // Dapatkan kategori makanan
+        $makananCategory = Category::where('name', 'makanan')->first();
 
-        $makanan = [
-            ['name' => 'Nasi Goreng', 'price' => 15000, 'category_id' => $makananCategory->id],
-            ['name' => 'Mie Goreng', 'price' => 12000, 'category_id' => $makananCategory->id],
+        // Tambahkan beberapa item makanan
+        $makananItems = [
+            ['name' => 'Nasi Goreng', 'price' => 15000],
+            ['name' => 'Ayam Bakar', 'price' => 20000],
+            ['name' => 'Sate Ayam', 'price' => 18000],
+            // Tambahkan item makanan lainnya di sini
         ];
 
-        $minuman = [
-            ['name' => 'Es Teh', 'price' => 5000, 'category_id' => $minumanCategory->id],
-            ['name' => 'Es Jeruk', 'price' => 7000, 'category_id' => $minumanCategory->id],
-        ];
-
-        foreach ($makanan as $item) {
-            Item::create($item);
+        foreach ($makananItems as $item) {
+            $makananCategory->items()->create($item);
         }
 
-        foreach ($minuman as $item) {
-            Item::create($item);
+        // Dapatkan kategori minuman
+        $minumanCategory = Category::where('name', 'minuman')->first();
+
+        // Tambahkan beberapa item minuman
+        $minumanItems = [
+            ['name' => 'Es Teh', 'price' => 5000],
+            ['name' => 'Jus Jeruk', 'price' => 8000],
+            ['name' => 'Kopi Hitam', 'price' => 10000],
+            // Tambahkan item minuman lainnya di sini
+        ];
+
+        foreach ($minumanItems as $item) {
+            $minumanCategory->items()->create($item);
         }
     }
 }
